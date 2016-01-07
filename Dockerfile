@@ -58,7 +58,6 @@ RUN chmod 775 /*.sh
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
-
 # Copy site into place.
 ADD www /var/www/site
 
@@ -74,4 +73,4 @@ CMD    ["/usr/sbin/sshd", "-D"]
 # By default, simply start apache.
 CMD /usr/sbin/apache2ctl -D FOREGROUND
 # Define default command (mariadb)
-CMD ["mysqld_safe"]
+CMD ["/run.sh"]
