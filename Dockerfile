@@ -37,6 +37,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
+ENV APACHE_RUN_DIR /var/run/apache2
 
 #***MariaDB 5.5***#
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
@@ -71,6 +72,7 @@ EXPOSE 3306
 
 CMD    ["/usr/sbin/sshd", "-D"]
 # By default, simply start apache.
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+#CMD /usr/sbin/apache2ctl -D FOREGROUND
+CMD ["apachectl", "-DFOREGROUND"]
 # Define default command (mariadb)
 CMD ["/run.sh"]
