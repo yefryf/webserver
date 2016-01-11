@@ -13,3 +13,4 @@ else
 fi
 
 exec mysqld_safe
+exec /usr/sbin/apache2 -DFOREGROUND

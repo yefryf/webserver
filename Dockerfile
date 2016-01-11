@@ -70,9 +70,9 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 
-CMD    ["/usr/sbin/sshd", "-D"]
+#CMD    ["/usr/sbin/sshd", "-D"]
 # By default, simply start apache.
 #CMD /usr/sbin/apache2ctl -D FOREGROUND
-CMD ["apachectl", "-DFOREGROUND"]
+#CMD ["apachectl", "-DFOREGROUND"]
 # Define default command (mariadb)
 CMD ["/run.sh"]
