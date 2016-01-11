@@ -21,7 +21,10 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 #***APACHE***#
 
 # Install apache, PHP, and supplimentary programs. curl and lynx-cur are for debugging the container.
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur supervisor
+RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Enable apache mods.
 RUN a2enmod php5
@@ -70,9 +73,5 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 
-#CMD    ["/usr/sbin/sshd", "-D"]
-# By default, simply start apache.
-#CMD /usr/sbin/apache2ctl -D FOREGROUND
-#CMD ["apachectl", "-DFOREGROUND"]
-# Define default command (mariadb)
+CMD ["/usr/bin/supervisord"]
 CMD ["/run.sh"]
