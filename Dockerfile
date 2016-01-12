@@ -68,8 +68,7 @@ ADD www /var/www/site
 # Update the default apache site with the config we created.
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
-EXPOSE 22 80
-#EXPOSE 3306
+EXPOSE 22 80 443 3306
 
 CMD ["/usr/bin/supervisord"]
 #CMD ["/run.sh"]
