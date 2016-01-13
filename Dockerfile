@@ -20,7 +20,7 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 #***APACHE***#
 
-# Install apache, PHP, and supplimentary programs. curl and lynx-cur are for debugging the container.
+# Install apache, PHP, and supplimentary programs.
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur supervisor
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor
 
