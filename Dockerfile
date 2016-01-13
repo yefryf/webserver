@@ -54,7 +54,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
 
 # setup mysql
 RUN sed -i -r 's/bind-address.*$/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
-ADD set-mysql-password.sh /tmp/set-mysql-password.sh
+ADD set-mysql-password.sh /set-mysql-password.sh
 RUN chmod 775 /*.sh
 RUN /bin/sh /tmp/set-mysql-password.sh
 
