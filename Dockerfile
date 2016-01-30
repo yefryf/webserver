@@ -13,7 +13,8 @@ RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/LV6HJ+gUapiGGCuYo2f+yCPchTBbJ0
 
 #***OpenSSH***#
 RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
+RUN mkdir /var/run/sshd \
+&& mkdir /var/run/supervisor
 
 RUN echo 'root:root' |chpasswd
 
@@ -58,6 +59,8 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
 RUN sed -i -r 's/bind-address.*$/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 #RUN mysqladmin -u root password root
 
+COPY mysql.sh /opt/mysql.sh
+
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
@@ -70,4 +73,3 @@ ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 EXPOSE 22 80 443 3306
 
 CMD ["/usr/bin/supervisord"]
-#CMD ["/run.sh"]
