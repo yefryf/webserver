@@ -57,9 +57,10 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
 
 # setup mysql
 RUN sed -i -r 's/bind-address.*$/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
-#RUN mysqladmin -u root password root
 
+# Set password root/toor to mysql + install_db to fix issue not starting
 COPY mysql.sh /opt/mysql.sh
+RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql/
 
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
