@@ -12,7 +12,7 @@ RUN touch /root/.ssh/authorized_keys
 RUN echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/LV6HJ+gUapiGGCuYo2f+yCPchTBbJ0xN58Nspu34IeW4ZQrp/9UT7OlfXz5L20FLV2LSjmJlUI+bYXzzl7LGjifFfmoiim6AxlpsGARTe5dqxFeNzPA4cBaUpSTtjSC0E1UISlaUCPeP47w6iLREdJhrfGsQ9DKTEqdDiJdu9fMs+u12rOS1P5D4RviN+gSztaISwA57X5ZyeMw6K1CiTQkWb9T2mudQc2G39UdUohijbFvBrfBreXDqZBOnGM1YKBfeJPog5hJGhNl2kpI9u7tmTcdSpcmtXwAtsAJn5+rwvlKpPQz9dFqB5pbwSlgCWKZgGl7WNgTvTlpxkjfT yefryf@yefry-neen" >> /root/.ssh/authorized_keys
 
 #***OpenSSH***#
-RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server vim
 RUN mkdir /var/run/sshd \
 && mkdir /var/run/supervisor
 
@@ -63,7 +63,7 @@ COPY mysql.sh /opt/mysql.sh
 RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql/
 
 # Add VOLUMEs to allow backup of config and databases
-VOLUME  ["/etc/mysql", "/var/lib/mysql"]
+# VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
 # Copy site into place.
 ADD www /var/www/site
